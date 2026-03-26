@@ -1,8 +1,11 @@
 package Model;
 
+//Es posa extends en la classe perque aquesta classe segeix snet un producte amb una variables especifica
 public class Electronica extends Productes{
+    //Creació de les variables
     int diesGarantia;
 
+    //Creació del constructor
     public Electronica(String nom, float preu, String codiDeBarres, int diesGarantia) {
         super(nom, preu, codiDeBarres);
         this.diesGarantia = diesGarantia;
@@ -17,6 +20,7 @@ public class Electronica extends Productes{
     }
 
     @Override
+    //Funcio que es trucada nomes si el producte es de tipus electronic, aquesta funcio calcula el preu final amb ajuda del dies de garantia
     public float calcularPreuFinal(){
         Float preu = getPreu();
         Float preuGarantia;

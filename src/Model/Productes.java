@@ -1,10 +1,12 @@
 package Model;
 
 public class Productes {
+    //Creació de les variables
     protected float preu;
     private String nom;
     private String codiDeBarres;
 
+    //Constructor de productes
     public Productes(String nom, float preu, String codiDeBarres) {
         this.nom = nom;
         this.preu = preu;

@@ -1,8 +1,10 @@
 package Model;
 
+//Es posa extends en la classe perque aquesta classe segeix snet un producte amb una variables especifica
 public class Textil extends Productes{
     String composicioTextil;
 
+    //Creacio del constructor
     public Textil(String nom, float preu, String codiDeBarres, String composicioTextil) {
         super(nom, preu, codiDeBarres);
         this.composicioTextil = composicioTextil;

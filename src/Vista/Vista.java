@@ -5,11 +5,13 @@ import Controller.Controller;
 import java.util.Scanner;
 
 public class Vista {
+    //Creacio del scanner
     private static final Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) throws Exception {
-        Controller controlador = new Controller();
+        Controller controlador = new Controller(); //Inialitzacio/Trucada al controller per poder agafar les seves funcions
         int opcio;
+        //Mostar menu + trucar a una funcio especifica dependent del que l'usuari esculli amb ajuda del switch case
         do{
             System.out.println("BENVINGUT AL SAPAMERCAT");
             System.out.println("-------\n-INICI-\n-------");
@@ -54,8 +56,6 @@ public class Vista {
         }while(opcio != 0);
 
         System.out.println("Fi del programa");
-
-        //HACER LA PARTE DEL GITHUB
 
     }
 
