@@ -2,6 +2,7 @@ package Vista;
 
 import Controller.Controller;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Vista {
@@ -18,6 +19,7 @@ public class Vista {
             System.out.println("1. Introduit producte");
             System.out.println("2. Passar per caixa");
             System.out.println("3. Mostrar carret de compra");
+            System.out.println("4. Buscar objectes per Streams/Lambda");
             System.out.println("0. Sortir");
             opcio = scan.nextInt();
 
@@ -47,6 +49,19 @@ public class Vista {
                     break;
                 case 3:
                     controlador.mostrarCarretDeLaCompra();
+                    break;
+                case 4:
+                    scan.nextLine();
+                    System.out.println("Introdueix codi de barres:");
+                    String codigo = scan.nextLine();
+
+                    Optional<String> resultado = controlador.buscarNombrePorCodigo(codigo);
+
+                    if (resultado.isPresent()) {
+                        System.out.println("Nom: " + resultado.get());
+                    } else {
+                        System.out.println("No trobat");
+                    }
                     break;
                 case 0:
                     break;

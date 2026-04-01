@@ -1,6 +1,6 @@
 package Model;
 
-public class Productes {
+public class Productes implements Comparable<Productes>{
     //Creació de les variables
     protected float preu;
     private String nom;
@@ -48,5 +48,10 @@ public class Productes {
                 "NOM: " + nom +
                 "\nPREU: " + calcularPreuFinal() +
                 "\nCODI DE BARRES: " + codiDeBarres;
+    }
+
+    @Override
+    public int compareTo(Productes o) {
+        return this.nom.compareToIgnoreCase(o.nom);
     }
 }

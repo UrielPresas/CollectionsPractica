@@ -1,16 +1,10 @@
 package Controller;
 
-import Model.Alimentacio;
-import Model.Electronica;
-import Model.Productes;
-import Model.ProductesCarro;
-import Model.Textil;
+import Model.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
 public class Controller {
     //Creacio del escaner
@@ -114,17 +108,61 @@ public class Controller {
     public void pasarPerCaixa(){
         LocalDate dataAvui = LocalDate.now();
         System.out.println("SAPAMERCAT\nData: " + dataAvui);
-        for(ProductesCarro pc : carro.values()){
+        /*for(ProductesCarro pc : carro.values()){
             System.out.println(pc);
-        }
+        }*/
+
+        Collections.sort(productes); //Comparador estandar
+
+        carro.forEach((codi, pc) -> {
+            System.out.println(pc);
+        });
         carro.clear();
     }
 
     //Funcio que mostra el carret de la compra, només mostra el nom i les unitats.
+    /*
     public void mostrarCarretDeLaCompra(){
-        for(ProductesCarro pc : carro.values()){
-            System.out.println("NOM: " + pc.getProducte().getNom() + "\tUnitats: " + pc.getUnitats());
-        }
+        //for(ProductesCarro pc : carro.values()){
+            //System.out.println("NOM: " + pc.getProducte().getNom() + "\tUnitats: " + pc.getUnitats());
+        //}
+
+        Collections.sort(productes, new ComparadorPreu()); //Comparador no estandar (compara preu nomès)
+
+        carro.forEach((codi, pc) -> {
+            System.out.println(
+                    pc.getProducte().getNom() +
+                            " | Unitats: " + pc.getUnitats()
+            );
+        });
+    }
+    */
+
+    public void mostrarCarretDeLaCompra(){
+        carro.values().stream()
+                .sorted((pc1, pc2) -> {
+                    if(pc1.getProducte() instanceof Textil && pc2.getProducte() instanceof Textil){
+                        Textil t1 = (Textil) pc1.getProducte();
+                        Textil t2 = (Textil) pc2.getProducte();
+                        return t1.getComposicioTextil().compareToIgnoreCase(t2.getComposicioTextil());
+                    } else if(pc1.getProducte() instanceof Textil){
+                        return 1; // Textil después de otros
+                    } else if(pc2.getProducte() instanceof Textil){
+                        return -1; // Textil después de otros
+                    } else {
+                        return 0; // otros tipos se mantienen en el orden que estén
+                    }
+                })
+                .forEach(pc -> {
+                    System.out.println(pc.getProducte().getNom() + " | Unitats: " + pc.getUnitats());
+                });
+    }
+
+    public Optional<String> buscarNombrePorCodigo(String codigo) {
+        return productes.stream()
+                .filter(p -> p.getCodiDeBarres().equals(codigo))
+                .map(Productes::getNom)
+                .findFirst();
     }
 
 }
